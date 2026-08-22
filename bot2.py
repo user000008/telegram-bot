@@ -6,9 +6,9 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 # توکن را از تنظیمات Render می‌خواند
-BOT_TOKEN = os.environ.get("BOT_TOKEN") 
-STICKER_ID = "CAACAgQAAxkBAAPGaojUKGL2VzmLZfDDfNcGjMNHKoIAAugZAAIe7clRvSbMswyP7KA9BA"
-REPEAT    = 100
+BOT_TOKEN = os.environ.get("BOT_TOKEN")  
+VIDEO_FILE = "cat.mp4"  # نام ویدیویی که آپلود کردی
+REPEAT    = 5  # تعداد دفعات فرستادن ویدیو (گذاشتم ۵ بار که خیلی روی مخ نباشه، خواستی زیادش کن)
 DB_FILE   = "users.db"
 logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO)
 log = logging.getLogger(__name__)
@@ -19,14 +19,14 @@ def db_init():
     with sqlite3.connect(DB_FILE) as con:
         con.execute("""
             CREATE TABLE IF NOT EXISTS users (
-                id          INTEGER PRIMARY KEY,
-                username    TEXT,
-                first_name  TEXT,
-                last_name   TEXT,
-                lang        TEXT,
-                first_seen  TEXT,
-                last_seen   TEXT,
-                visits      INTEGER DEFAULT 1
+                id         INTEGER PRIMARY KEY,
+                username   TEXT,
+                first_name TEXT,
+                last_name  TEXT,
+                lang       TEXT,
+                first_seen TEXT,
+                last_seen  TEXT,
+                visits     INTEGER DEFAULT 1
             )
         """)
 
@@ -54,9 +54,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     db_save(user)
     log.info(f"Start: {user.full_name} | ID: {user.id}")
 
-    # ارسال استیکر به تعداد REPEAT بار
+    # ارسال ویدیو به تعداد REPEAT بار
     for _ in range(REPEAT):
-        await context.bot.send_sticker(update.effective_chat.id, STICKER_ID)
+        with open(VIDEO_FILE, 'rb') as video:
+            await context.bot.send_video(update.effective_chat.id, video)
 
 
 def main():
