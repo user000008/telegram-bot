@@ -8,7 +8,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 # توکن را از تنظیمات Render می‌خواند
 BOT_TOKEN = os.environ.get("BOT_TOKEN")  
 VIDEO_FILE = "cat.mp4"  # نام ویدیویی که آپلود کردی
-REPEAT    = 5  # تعداد دفعات فرستادن ویدیو (گذاشتم ۵ بار که خیلی روی مخ نباشه، خواستی زیادش کن)
+REPEAT    = 60  # تعداد دفعات فرستادن ویدیو (گذاشتم ۵ بار که خیلی روی مخ نباشه، خواستی زیادش کن)
 DB_FILE   = "users.db"
 logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO)
 log = logging.getLogger(__name__)
