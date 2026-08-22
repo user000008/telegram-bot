@@ -9,7 +9,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 BOT_TOKEN = os.environ.get("BOT_TOKEN")  
 
 # آیدی ویدیو که از تلگرام گرفتی
-VIDEO_FILE_ID = "BAACAgQAAxkBAAM8aol2tlNC7T48XEfTYVpHC2tPVW8AAlEfAAJ9R0FQxyund4oXC8s9BA"
+VIDEO_FILE_ID = "BAACAgQAAxkDAAIDp2qJcaE6GbD8Oi6GlgQIJWx-iu4CAAIKJAACwA5IUFIJuHRdHphJPQQ"
 
 # آیدی استیکر نهایی
 STICKER_ID = "CAACAgQAAxkBAAPGaojUKGL2VzmLZfDDfNcGjMNHKoIAAugZAAIe7clRvSbMswyP7KA9BA"
