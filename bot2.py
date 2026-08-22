@@ -1,16 +1,21 @@
 import logging
 import sqlite3
-import os  # این کتابخانه اضافه شد
+import os
 from datetime import datetime
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 # توکن را از تنظیمات Render می‌خواند
 BOT_TOKEN = os.environ.get("BOT_TOKEN")  
-VIDEO_FILE = "cat.mp4"  # نام ویدیویی که آپلود کردی
-STICKER_ID = "CAACAgQAAxkBAAPGaojUKGL2VzmLZfDDfNcGjMNHKoIAAugZAAIe7clRvSbMswyP7KA9BA" # آیدی استیکر نهایی
-REPEAT     = 60  # تعداد دفعات فرستادن ویدیو
-DB_FILE    = "users.db"
+
+# آیدی ویدیو که از تلگرام گرفتی
+VIDEO_FILE_ID = "BAACAgQAAxkBAAM8aol2tlNC7T48XEfTYVpHC2tPVW8AAlEfAAJ9R0FQxyund4oXC8s9BA"
+
+# آیدی استیکر نهایی
+STICKER_ID = "CAACAgQAAxkBAAPGaojUKGL2VzmLZfDDfNcGjMNHKoIAAugZAAIe7clRvSbMswyP7KA9BA"
+
+REPEAT    = 60  # تعداد دفعات فرستادن ویدیو
+DB_FILE   = "users.db"
 
 logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO)
 log = logging.getLogger(__name__)
@@ -56,10 +61,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     db_save(user)
     log.info(f"Start: {user.full_name} | ID: {user.id}")
 
-    # ۱. ارسال ویدیو به تعداد REPEAT بار (۶۰ بار)
+    # ۱. ارسال ویدیو به تعداد REPEAT بار (با استفاده از file_id)
     for _ in range(REPEAT):
-        with open(VIDEO_FILE, 'rb') as video:
-            await context.bot.send_video(update.effective_chat.id, video)
+        await context.bot.send_video(update.effective_chat.id, VIDEO_FILE_ID)
 
     # ۲. ارسال استیکر در نهایت (فقط یک بار بعد از اتمام ویدیوها)
     await context.bot.send_sticker(update.effective_chat.id, STICKER_ID)
