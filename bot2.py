@@ -15,7 +15,7 @@ PORT               = int(os.environ.get("PORT", 10000))
 
 genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash",
+    model_name="gemini-2.0-flash",
     system_instruction=(
         "تو یک ربات تلگرامِ بسیار مغرور، شوخ‌طبع، طعنه‌زن، حاضرجواب و بی‌ادب اما کاملاً باهوش هستی. "
         "کاربرت هر پیامی داد، با کنایه، تکبر و جواب‌های کوتاه، کوبنده و خنده‌دار (به زبان فارسی عامیانه) جوابش رو بده. "
